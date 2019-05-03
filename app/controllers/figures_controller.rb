@@ -2,6 +2,7 @@ class FiguresController < ApplicationController
   # add controller methods
 
   get '/figures' do
+    @figures = Figure.all
     erb :'figures/index'
   end
 
@@ -10,8 +11,12 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
-    #binding.pry
     @figure = Figure.create(params[:figure])
+    @title = Title.find_or_create_by(params[:title][:name])
+    @landmark = Landmark.find_or_create_by(params[:landmark])
+    FigureTitle.find_or_create_by(figure_id: @figure.id, title_id: @title.id)
+    @landmark.figure_id = @figure.id
+    @figure.save
     redirect to "/figures/#{@figure.id}"
   end
 
@@ -20,8 +25,15 @@ class FiguresController < ApplicationController
     erb :'figures/edit'
   end
 
-  post '/figures/:id/edit' do
-    puts params
+  patch '/figures/:id' do
+    binding.pry
+    @figure = Figure.find(params[:id])
+    @title = Title.find_or_create_by(params[:title][:name])
+    @landmark = Landmark.find_or_create_by(params[:landmark])
+    FigureTitle.find_or_create_by(figure_id: @figure.id, title_id: @title.id)
+    @landmark.figure_id = @figure.id
+    @figure.save
+    redirect to "/figures/#{@figure.id}"
   end
 
   get '/figures/:id' do

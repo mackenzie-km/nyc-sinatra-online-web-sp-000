@@ -7,7 +7,7 @@
   <label> Choose their appropriate title and/or create a new title: </label><br>
     <% Title.all.each do |title| %>
       <input type="checkbox" id="<%= "title_#{title.id}" %>" name="figure[title_ids][]" value="<%= title.id %>">
-      <label for="title_id"> <%= "title_#{title.id}"%> </label><br>
+      <label for="<%= "title_#{title.id}" %>"> <%= "#{title.name}"%> </label><br>
     <% end %>
     <input type="text" id="new_title" name="title[name]"><br><br>
 
