@@ -10,7 +10,9 @@ class FiguresController < ApplicationController
   end
 
   post '/figures' do
-    puts params
+    #binding.pry
+    @figure = Figure.create(params[:figure])
+    redirect to "/figures/#{@figure.id}"
   end
 
   get '/figures/:id/edit' do
