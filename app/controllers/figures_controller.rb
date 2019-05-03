@@ -2,29 +2,29 @@ class FiguresController < ApplicationController
   # add controller methods
 
   get '/figures' do
-    erb :'/figures/index'
+    erb :'figures/index'
   end
 
-  get "/figures/new" do
-    erb :'/figures/new'
+  get '/figures/new' do
+    erb :'figures/new'
   end
 
-  post "/figures" do
+  post '/figures' do
     puts params
   end
 
-  get "/figures/:id/edit" do
-    @landmark = Landmark.find(params[:id])
-    erb :'/figures/edit'
+  get '/figures/:id/edit' do
+    @figure = Figure.find(params[:id])
+    erb :'figures/edit'
   end
 
-  post "/figures/:id/edit" do
+  post '/figures/:id/edit' do
     puts params
   end
 
-  get "/figures/:id" do
-    @landmark = Landmark.find(params[:id])
-    erb :'/figures/show'
+  get '/figures/:id' do
+    @figure = Figure.find(params[:id])
+    erb :'figures/show'
   end
 
 
